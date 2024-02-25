@@ -14,14 +14,20 @@ class MyFrame(wx.Frame):
 class MyPanel(wx.Panel):
     def __init__(self,parent):
         super(MyPanel, self).__init__(parent)
-        gridsizer = wx.GridSizer(4,4,15,15)
+       
+        sizer = wx.BoxSizer(wx.HORIZONTAL)
         
-        for i in range (1,17):
-            lbl = "Btn" + str(i)
-            
-            gridsizer.Add(wx.Button(self, label=lbl), 0, wx.EXPAND)
+        self.label = wx.StaticText(self, label = "Hello, Label!")
+        sizer.Add(self.label, 1 , wx.EXPAND) # 1 : 비율 / 아래 0 과 비교
+        
+        self.button = wx.Button(self, label = "Btn!!!")    
+        sizer.Add(self.button, 0) # 0 : 비율 / 위 1 과 비교
+        self.button.Bind(wx.EVT_BUTTON, self.onClickMe) # event handler 
 
-        self.SetSizer(gridsizer)
+        self.SetSizer(sizer)
+        
+    def onClickMe(self, event): #event handling
+        self.label.SetLabelText("Text has been changed!")
         
 class MyApp(wx.App):
     def OnInit(self):
