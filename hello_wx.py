@@ -8,8 +8,20 @@ class MyFrame(wx.Frame):
     def __init__(self, parent, title):
         super(MyFrame, self).__init__(parent, title=title, size=(300, 200))
         
-        panel = wx.Panel(self)
-        text = wx.StaticText(panel, label="Hello World", pos=(100, 50))
+        #panel - 1st way
+        #panel = wx.Panel(self)
+        #text = wx.StaticText(panel, label="Hello World", pos=(100, 50))
+
+        #2nd way
+        panel = MyPanel(self)
+        
+#panel - 2nd way
+class MyPanel(wx.Panel):
+    def __init__(self,parent):
+        super(MyPanel, self).__init__(parent)
+        text =  wx.StaticText(self, label="Hello World", pos=(100, 50))
+
+
 
 class MyApp(wx.App):
     def OnInit(self):
