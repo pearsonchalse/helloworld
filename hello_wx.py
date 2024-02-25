@@ -13,21 +13,29 @@ class MyFrame(wx.Frame):
         
 class MyPanel(wx.Panel):
     def __init__(self,parent):
-        super(MyPanel, self).__init__(parent)
+        super(MyPanel, self).__init__(parent)       
        
-        sizer = wx.BoxSizer(wx.HORIZONTAL)
+        sizer = wx.BoxSizer(wx.VERTICAL)
         
-        self.label = wx.StaticText(self, label = "Hello, Label!")
-        sizer.Add(self.label, 1 , wx.EXPAND) # 1 : 비율 / 아래 0 과 비교
+        self.label = wx.StaticText(self, label = "Hello, Toggle")
+        sizer.Add(self.label, 0 , wx.EXPAND) 
         
-        self.button = wx.Button(self, label = "Btn!!!")    
-        sizer.Add(self.button, 0) # 0 : 비율 / 위 1 과 비교
-        self.button.Bind(wx.EVT_BUTTON, self.onClickMe) # event handler 
+        self.tBtn = wx.ToggleButton(self, label = "Click to On")    
+        self.tBtn.SetValue(True)
+        sizer.Add(self.tBtn, 0) 
+        self.tBtn.Bind(wx.EVT_TOGGLEBUTTON, self.onClickMe) 
 
         self.SetSizer(sizer)
         
     def onClickMe(self, event): #event handling
-        self.label.SetLabelText("Text has been changed!")
+        state = event.GetEventObject().GetValue()
+        
+        if state == True:
+            self.label.SetLabelText("Off")
+            event.GetEventObject().SetLabel("Click To On")
+        else:
+            self.label.SetLabelText("On")
+            event.GetEventObject().SetLabel("Click To Off")
         
 class MyApp(wx.App):
     def OnInit(self):
