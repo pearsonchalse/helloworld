@@ -19,8 +19,9 @@ class MyFrame(wx.Frame):
 class MyPanel(wx.Panel):
     def __init__(self,parent):
         super(MyPanel, self).__init__(parent)
-        text =  wx.StaticText(self, label="Hello World", pos=(100, 50))
-
+        #text =  wx.StaticText(self, label="Hello World", pos=(100, 50))
+        # label example
+        label = wx.StaticText(self, label = "Hello, World", pos=(100,50))
 
 
 class MyApp(wx.App):
